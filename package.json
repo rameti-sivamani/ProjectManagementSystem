@@ -22,8 +22,11 @@
   "author": "Sivamani Rameti",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.1",
-    "nodemon": "^3.1.7",
-    "path": "^0.12.7"
+    "body-parser": "^1.20.3",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }

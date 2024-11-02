@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.navbar {
+    display: flex;
+    width: 100%;
+    height: 80px;
+    background: #457feb;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#brand-logo {
+    /* mix-blend-mode:  overlay; */
+    filter: hue-rotate(-280deg)
+}
+
+.navbar .navbar-list {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    gap: 30px;
+}
+
+.navbar .navbar-list a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar .navbar-list a:hover {
+    text-decoration: underline;
+    color: #f96d00;
+    text-shadow: none;
+}
+
+.main-intro {
+    display: grid;
+    height: calc(100vh - 80px);
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    background: #a19b9b;
+    background-image: url('Hero-BG-PA.avif');
+    background-size: 100% 650px;
+    background-repeat: no-repeat;
+}
+
+.main-intro article {
+    justify-self: center;
+    width: 100%;
+}
+
+.main-intro article img {
+    width: 100%;
+    height: calc(100vh - 90px);
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+}
+
+
+.main-intro article h1 {
+    font-size: 36px;
+}
+
+/* form control */
+.form-control {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 80%;
+    justify-self: center;
+}
+
+.form-control input {
+    width: 80%;
+    height: 40px;
+    /* border-radius: 8px; */
+    outline: none;
+    padding: 0 10px;
+    font-size: 20px;
+    border: none;
+    border-bottom: 2px solid gold;
+}
+
+.form-control input[type='submit'] {
+    width: 40%;
+    height: 40px;
+    background: #f96d00;
+    cursor: pointer;    
+    border: 1px solid gray;
+
+}
+
+#brand-name {
+    font-family: cursive;
+}
