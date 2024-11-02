@@ -1,0 +1,23 @@
+{
+  "name": "project_management_system",
+  "version": "1.0.0",
+  "description": "This project is used t manage the project related tasks in the collaberativve manner ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "project",
+    "management",
+    "todo",
+    "list",
+    "project",
+    "project",
+    "management",
+    "system",
+    "collaboration",
+    "teamup"
+  ],
+  "author": "Sivamani Rameti",
+  "license": "ISC"
+}
