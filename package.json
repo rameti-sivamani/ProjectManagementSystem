@@ -4,7 +4,8 @@
   "description": "This project is used t manage the project related tasks in the collaberativve manner ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "keywords": [
     "project",
@@ -19,5 +20,10 @@
     "teamup"
   ],
   "author": "Sivamani Rameti",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "nodemon": "^3.1.7",
+    "path": "^0.12.7"
+  }
 }
