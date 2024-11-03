@@ -1,19 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./index.css">
-    <title>Registration</title>
+<%- include('./layouts/head.ejs') %>
+
+<link rel="stylesheet" href="./registration.css">
+<link rel="stylesheet" href="./form-styles.css">
 
 </head>
 <body>
-        <form action="" class="form-control">
-            <input type="text">
-            <input type="password">
-            <input type="submit">
-            <p>Already  have an account? <a href="#">Login</a></p>
 
-        </form>
+<%- include('./layouts/navbar.ejs') %>
+<main>
+    <form action="" class="form-control" data-path="<%= path %>" onsubmit="return validateForm()">
+        <h1>
+            <%= path == "/login" ? "Login" : "" %>
+        </h1>
+        <h1>
+            <%= path == "/register" ? "Register Now" : "" %>
+        </h1>
+        
+        <% if (path == '/register') { %> 
+            <div class="form-item">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <span class="error-message" id="email-error"></span>
+            </div>
+        <% } %>
+
+        <div class="form-item">
+            <label for="username"><%= path == '/login' ? "Username or Email" : "Username" %></label>
+            <input type="text" id="username" name="username" required>
+            <span class="error-message" id="username-error"></span>
+        </div>
+        
+        <div class="form-item">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <span class="error-message" id="password-error"></span>
+        </div>
+
+        <% if (path == '/register') { %> 
+            <div class="form-item">
+                <label for="con-password">Confirm Password</label>
+                <input type="password" id="con-password" name="con-password" required>
+                <span class="error-message" id="confirm-password-error"></span>
+            </div>
+        <% } %>
+
+        <input type="submit" value="<%= path == '/login' ? 'Login' : 'Register' %>">
+        
+        <p>Already have an account? 
+            <a href="<%= path == '/login' ? '/register' : '/login' %>">
+                <%= path == '/register' ? "Login" : "Register" %>
+            </a>
+        </p>
+        
+        <hr width="100%">
+        <p>or</p>
+        <p><%= path == '/login' ? "Login" : "Register" %> Using</p>
+
+        <div class="social-link">
+            <button type="button">Google</button>
+            <button type="button">Facebook</button>
+        </div>
+    </form>
+</main>
+<script src="form-validation.js"></script>
 </body>
 </html>
