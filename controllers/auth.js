@@ -18,21 +18,18 @@ exports.postRegister = (req, res, next) => {
   const { email, username, password } = req.body;
 
   User.create({
-    email: email, 
+    email: email,
     username: username,
     password: password,
   })
     .then((res) => {
-      return res;  
+      return res;
     })
     .catch((err) => {
       return res.status(500).json(err);
     });
 };
 
-
-exports.postLogin=(req,res,next)=>{
-  const {email,password}=req.body;
-  
-
-}
+exports.postLogin = (req, res, next) => {
+  const { email, password } = req.body;
+};

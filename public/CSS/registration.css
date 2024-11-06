@@ -26,7 +26,7 @@
     border: none;
     width: 100%;
     border-bottom: 2px solid gold;
-    background: rgba(203, 199, 199,0.5);
+    background: rgba(203, 199, 199, 0.5);
 }
 
 .form-control input:focus {
@@ -69,7 +69,7 @@ main {
     place-items: center;
     place-content: center;
     height: calc(100vh - 90px);
-    background-image:url('/Images/bg-image-registration.jpg');
+    background-image: url('/Images/bg-image-registration.jpg');
     background-size: 100% calc(100vh - 90px);
 
 }

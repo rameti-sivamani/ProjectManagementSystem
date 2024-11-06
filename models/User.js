@@ -4,14 +4,14 @@ const sequelize = require("../utils/db");
 const User = sequelize.define("User", {
   id: {
     type: Sequelize.UUID,
-    defaultValue:Sequelize.UUIDV4,
+    defaultValue: Sequelize.UUIDV4,
     allowNull: false,
     primaryKey: true,
   },
   email: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique:true
+    unique: true,
   },
   username: {
     type: Sequelize.STRING,
@@ -21,6 +21,6 @@ const User = sequelize.define("User", {
   password: {
     type: Sequelize.STRING,
     allowNull: false,
-  }, 
+  },
 });
 module.exports = User;
