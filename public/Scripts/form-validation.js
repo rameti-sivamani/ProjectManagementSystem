@@ -30,7 +30,7 @@ function validateForm() {
             isValid = false;
         }
         
-        if (password.value !== confirmPassword.value) {
+        if (password.value != confirmPassword.value) {
             document.getElementById("confirm-password-error").innerText = "Passwords do not match.";
             isValid = false;
         }

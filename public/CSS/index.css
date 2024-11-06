@@ -45,7 +45,7 @@
     grid-template-columns: 1fr 1fr;
     align-items: center;
     background: #a19b9b;
-    background-image: url('Hero-BG-PA.avif');
+    background-image: url('/Images/Hero-BG-PA.avif');
     background-size: 100% calc(100vh - 90px);
     background-repeat: no-repeat;
 }

@@ -1,14 +1,14 @@
 <%- include('./layouts/head.ejs') %>
 
-<link rel="stylesheet" href="./registration.css">
-<link rel="stylesheet" href="./form-styles.css">
+<link rel="stylesheet" href="./CSS/registration.css">
+<link rel="stylesheet" href="./CSS/form-styles.css">
 
 </head>
 <body>
 
 <%- include('./layouts/navbar.ejs') %>
 <main>
-    <form action="" class="form-control" data-path="<%= path %>" onsubmit="return validateForm()">
+    <form action="" method="post"  class="form-control" data-path="<%= path %>" onsubmit="return validateForm()">
         <h1>
             <%= path == "/login" ? "Login" : "" %>
         </h1>

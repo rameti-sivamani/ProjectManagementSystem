@@ -1,8 +1,12 @@
 const express = require("express");
 const app = express.Router();
-const registration = require("../controllers/registration");
-app.use("/", registration.home);
-app.use("/register", registration.register);
-app.use("/login", registration.login);
+const registration = require("../controllers/auth");
 
+app.get("/register", registration.register);
+app.get("/login", registration.login);
+app.get("/", registration.home);
+
+
+//post requests
+app.post('/register',registration.postRegister);
 module.exports = app;

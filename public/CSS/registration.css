@@ -69,7 +69,7 @@ main {
     place-items: center;
     place-content: center;
     height: calc(100vh - 90px);
-    background-image:url('bg-image-registration.jpg');
+    background-image:url('/Images/bg-image-registration.jpg');
     background-size: 100% calc(100vh - 90px);
 
 }
