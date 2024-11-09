@@ -22,9 +22,14 @@
   "author": "Sivamani Rameti",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.7.2",
     "body-parser": "^1.20.3",
+    "connect-mongodb-session": "^5.0.0",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "mongoose": "^8.8.0",
     "mysql2": "^3.11.3",
     "sequelize": "^6.37.5",
     "uuid": "^11.0.2"

@@ -1,35 +1,74 @@
+const bcrypt = require("bcryptjs");
 const User = require("../models/User");
-exports.register = (req, res, next) => {
+
+User.register = (req, res, next) => {
   res.render("registration.ejs", {
     path: "/register",
+    title: "Register",
   });
 };
 
-exports.login = (req, res, next) => {
+User.login = (req, res, next) => {
   res.render("registration.ejs", {
     path: "/login",
+    title: "Login",
   });
 };
-exports.home = (req, res, next) => {
-  res.render("index.ejs");
+User.home = (req, res, next) => {
+  res.render("index.ejs", {
+    title: "Essense Flow",
+  });
 };
 
-exports.postRegister = (req, res, next) => {
-  const { email, username, password } = req.body;
+User.postRegister = (req, res, next) => {
+  const { email, fullname, password } = req.body;
 
-  User.create({
-    email: email,
-    username: username,
-    password: password,
-  })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      return res.status(500).json(err);
-    });
+  User.findByEmail(email).then((user) => {
+    if (user) {
+      return res.status(400).json({ message: "Email already exists" });
+    }
+    bcrypt
+      .hash(password, 12)
+      .then((paswd) => {
+        User
+          .createUser({
+            email: email,
+            fullname: fullname,
+            password: paswd,
+          })
+          .then((result) => {
+            console.log(result);
+            res.redirect("/");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 };
 
-exports.postLogin = (req, res, next) => {
+User.postLogin = (req, res, next) => {
   const { email, password } = req.body;
+  User.findByEmail(email).then((user) => {
+    if (user) {
+      bcrypt
+        .compare(password, user.password)
+        .then((isFound) => {
+          if (isFound) {
+            console.log("User logged in");
+            return res.redirect("/");
+          }
+          return res.status(400).json({ message: "Invalid password" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return res.status(400).json({ message: "The email does not exist" });
+    } 
+  });
 };
+module.exports = User;
