@@ -4,7 +4,7 @@ const User = require("../Schema/User");
 User.createUser = (user) => {
   const newUser = new User({
     email: user.email,
-    fullName: user.fullname,
+    fullname: user.fullname,
     password: user.password,
   })
   return newUser.save()
