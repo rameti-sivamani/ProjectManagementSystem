@@ -64,8 +64,25 @@
                                         <button type="button">Facebook</button>
                                     </div>
                 </form>
+           
+
+
+
+
             </main>
+
+
+
+            <% if (message) { %>
+                <div id="toast" class="toast show">
+                    <span>
+                        <%= message[0] %>
+                    </span>
+                </div>
+            <% } %>
             <script src="form-validation.js"></script>
+
+           
     </body>
 
     </html>

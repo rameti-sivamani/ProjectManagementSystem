@@ -17,25 +17,31 @@ const User = require("../models/User");
 //get requuests
 
 User.register = (req, res, next) => {
+  const message = req.flash("message");
   res.render("registration.ejs", {
     path: "/register",
     title: "Register",
+    message: message,
   });
 };
 
 User.login = (req, res, next) => {
+  const message = req.flash("message");
   res.render("registration.ejs", {
     path: "/login",
     title: "Login",
+    message: message,
   });
 };
 User.home = (req, res, next) => {
+  const message = req.flash('message');
   res.render("index.ejs", {
     title: "Essense Flow",
+    message:message
   });
 };
 
-//poost requuests
+//post requuests
 
 User.postRegister = (req, res, next) => {
   const { email, fullname, password } = req.body;
@@ -61,14 +67,13 @@ User.postRegister = (req, res, next) => {
               { expiresIn: "1hr" }
             );
 
-            console.log("User logged in");
-
             res.cookie("token", token, {
               httpOnly: true, // Prevent JavaScript access
               secure: process.env.NODE_ENV === "production", // Only send over HTTPS in production
               sameSite: "Strict", // Prevent CSRF attacks
               maxAge: 3600000, // Cookie expiry (1 hour)
             });
+            req.flash("message", "Successfully Registered");
             res.redirect("/dashboard");
             transporter.sendMail(
               {
@@ -78,7 +83,7 @@ User.postRegister = (req, res, next) => {
                 text: "Hello! This is a test email sent using Nodemailer in Node.js.", // plain text body
                 html:
                   "<p>Hello!" +
-                  user.fullname+
+                  user.fullname +
                   " This is a <strong>test</strong> email sent using Nodemailer in Node.js.</p>", // HTML body
               },
               (error, info) => {
@@ -124,7 +129,7 @@ User.postLogin = (req, res, next) => {
               sameSite: "Strict", // Prevent CSRF attacks
               maxAge: 3600000, // Cookie expiry (1 hour)
             });
-
+            req.flash("message", "Successfully Logged In");
             return res.redirect("/dashboard"); // Redirect to the dashboard
           }
           return res.status(400).json({ message: "Invalid password" });

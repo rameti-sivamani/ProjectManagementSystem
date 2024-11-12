@@ -1,0 +1,54 @@
+<header class="main-header">
+    <nav class="navbar">
+        <div class="navbar-left">
+          <a href="#" class="brand-logo"><li class="navbar-item ">
+            <img src="./Images/download.png" id="brand-logo" width="120px" height="80px" alt="EssenceFlow">
+        </li></a>
+        </div>
+        
+        <div class="navbar-center">
+          <form action="/search" method="get">
+            <input type="text" class="search-bar" placeholder="Search...">
+            <button type="submit" id="search-btn"><i class="fa-brands fa-searchengin"></i></button>
+          </form>
+        </div>
+        
+        <div class="navbar-right">
+          <form action="/dashboard/create" method="post">
+            <button class="add-icon" aria-label="add-project">
+              <i class="fa-solid fa-plus" style="color: #005eff;"></i> New Project
+            </button>
+          </form>
+         
+          <!-- Calendar Icon -->
+          <button class="calendar-icon" aria-label="Calendar">
+            <i class="fa-solid fa-calendar-days" style="color: #005eff;"></i> Calander
+          </button>
+      
+          <!-- Help Icon -->
+          <button class="help-icon" aria-label="Help">
+            <i class="fa-solid fa-handshake-angle" style="color: #005eff;"></i> Support
+          </button>
+      
+          <!-- Theme Switcher Icon -->
+          <button class="theme-switcher" aria-label="Theme Switcher" > 
+            <i class="fa-solid fa-moon" style="color: #005eff;"></i> Light
+          </button>
+      
+          <!-- User Profile Icon -->
+          <div class="user-profile">
+            <i class="fa-solid fa-user" style="color: #005eff;"></i> Profile    
+
+             <div class="dropdown-menu">
+              <a href="#">Profile Settings</a>
+              <a href="#">Account Settings</a>
+             <a href="#"> <form action="/dashboard/logout" method="post">
+                <button>logout</button>   
+              </form>
+            </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+</header>
