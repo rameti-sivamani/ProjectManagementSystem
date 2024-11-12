@@ -1,54 +1,35 @@
-<article class="project-card">
-    <h1>Prooject Name</h1>
-    <p class="prj-status finished"></p>Status</p>
-    <p>Taks Coompleted</p>
-    <h3>Team</h3>
-    <p>view Details</p>
-</article>
+<% if (projects.length > 0) { %>
+    <% projects.forEach(project => { %>
+      <div class="project-card">
+        <h2 class="project-title">Project Title: <%= project.title %></h2>
 
-<article class="project-card">
-    <h1>Project Name</h1>
-    <p>Project Description</p>
-    <h3>Project Deadline</h3>
-    <h3>Project Status</h3>
-</article><article class="project-card">
-    <h1>Project Name</h1>
-    <p>Project Description</p>
-    <h3>Project Deadline</h3>
-    <h3>Project Status</h3>
-</article><article class="project-card">
-    <h1>Project Name</h1>
-    <p>Project Description</p>
-    <h3>Project Deadline</h3>
-    <h3>Project Status</h3>
-</article><article class="project-card">
-    <h1>Project Name</h1>
-    <p>Project Description</p>
-    <h3>Project Deadline</h3>
-    <h3>Project Status</h3>
-</article><article class="project-card">
-    <h1>Project Name</h1>
-    <p>Project Description</p>
-    <h3>Project Deadline</h3>
-    <h3>Project Status</h3>
-</article><article class="project-card">
-    <h1>Project Name</h1>
-    <p>Project Description</p>
-    <h3>Project Deadline</h3>
-    <h3>Project Status</h3>
-</article><article class="project-card">
-    <h1>Project Name</h1>
-    <p>Project Description</p>
-    <h3>Project Deadline</h3>
-    <h3>Project Status</h3>
-</article><article class="project-card">
-    <h1>Project Name</h1>
-    <p>Project Description</p>
-    <h3>Project Deadline</h3>
-    <h3>Project Status</h3>
-</article><article class="project-card">
-    <h1>Project Name</h1>
-    <p>Project Description</p>
-    <h3>Project Deadline</h3>
-    <h3>Project Status</h3>
-</article>
+        <!-- Project Status -->
+        <p class="project-status <%= project.status === 'ongoing' ? 'status-ongoing' : 'status-finished' %>">
+        <%= project.status %>
+        </p>
+
+        <p class="project-description"><%= project.description %></p>
+        <p class="project-tasks">Total Tasks Completed: <%= project.completedTasks %></p>
+
+        <!-- Team Members -->
+        <div class="team-members">
+          <h3>Team Members:</h3>
+          <ul>
+            <% project.team.slice(0, 2).forEach(member => { %>
+              <li><%= member.email %> (<%= member.role %>)</li>
+            <% }); %>
+          </ul>
+          <% if (project.team.length > 2) { %>
+            <p>and <%= project.team.length - 2 %> more...</p>
+          <% } %>
+        </div>
+
+        <!-- View Project Button -->
+        <div class="view-button">
+          <a href="/projects/<%= project._id %>" class="btn-view">View Project</a>
+        </div>
+      </div>
+    <% }); %>
+  <% } else { %>
+    <p>No projects found. </p>
+  <% } %>

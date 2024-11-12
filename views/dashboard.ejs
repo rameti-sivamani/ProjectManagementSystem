@@ -2,14 +2,20 @@
     <link rel="stylesheet" href="./CSS/dash-nav.css">
     <link rel="stylesheet" href="./CSS/sidebar.css">
     </head>
-<body>
 
-    <%- include('./dashboard/navbar.ejs') %>
-    <main>
-        <%- include('./dashboard/sidebar.ejs') %>   
-        <section class="main-content">
-            <%- include('./dashboard/projects.ejs') %>   
-        </section>
-    </main>
-</body>
-</html> 
+    <body>
+
+        <%- include('./dashboard/navbar.ejs') %>
+            <main>
+                <%- include('./dashboard/sidebar.ejs') %>
+                    <section class="main-content">
+                        <% if(path=='/dashboard' ) {%>
+
+                            <%- include('./dashboard/projects.ejs') %>
+
+                                <% } %>
+                    </section>
+            </main>
+    </body>
+
+    </html>

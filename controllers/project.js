@@ -3,10 +3,10 @@ const Project = require("../models/Project");
 //post Requests
 Project.createproject = (req, res, next) => {
   const email = req.user.email; // Email of the user creating the project
-  const title = req.body.title;
-  const description = req.body.description;
-  const deadline = req.body.deadline;
-  const members = req.body.members || []; // Members added by the creator
+  const title ="ECommerce" //req.body.title;
+  const description ="this is about ecommerce"// req.body.description;
+  const deadline ="2024-12-21"// req.body.deadline;
+  const members = ["a@gmail.com"]//req.body.members || []; // Members added by the creator
   const tasks = [];
   // Add the creator to the members list with special privileges
   const projectMembers = [
@@ -33,21 +33,4 @@ Project.createproject = (req, res, next) => {
     });
 };
 
-Project.getAllProjects=(req,res,next)=>{
-  const email=req.user.email;
-  Project.find({ 'team.email': email })
-  .then((projects) => {
-    if (projects.length > 0) {
-      console.log('Projects found:', projects);
-      return projects;
-    } else {
-      console.log('No projects found for this email');
-      res.status(500).json({ message: "Error creating project", error: err });
-
-    }
-  })
-  .catch((err) => {
-    console.error('Error finding projects:', err);
-  });
-}
 module.exports = Project;
