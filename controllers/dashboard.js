@@ -2,6 +2,8 @@ const Project = require("../models/Project");
 const session = require("express-session");
 
 const dashboard = {};
+
+
 dashboard.home = (req, res, next) => {
   const email = req.user.email;
   const message = req.flash("message");
@@ -10,7 +12,8 @@ dashboard.home = (req, res, next) => {
     res.render("dashboard.ejs", {
       title: "Dashboard",
       projects: result,
-      path:"/dashboard"
+      path:"/dashboard",
+      owner:email
     });
   });
 };

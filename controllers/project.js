@@ -1,5 +1,6 @@
 const Project = require("../models/Project");
 
+
 //post Requests
 Project.createproject = (req, res, next) => {
   const email = req.user.email; // Email of the user creating the project
@@ -33,4 +34,23 @@ Project.createproject = (req, res, next) => {
     });
 };
 
+Project.deleteProject = (req, res, next) => {
+ const id = req.params.projectId;
+  //const id=req.body.projectId
+  Project.findByIdAndDelete({_id:id})
+    .then((result) => {
+      
+      res.redirect('/dashboard')
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+Project.createNewProject=(req,res,next)=>{
+  res.render('dashboard',{
+    title:"Create project",
+    path:"/dashboard/create"
+  })
+}
 module.exports = Project;

@@ -1,6 +1,6 @@
 <%- include('./layouts/head.ejs') %>
-    <link rel="stylesheet" href="./CSS/dash-nav.css">
-    <link rel="stylesheet" href="./CSS/sidebar.css">
+    <link rel="stylesheet" href="/CSS/dash-nav.css">
+    <link rel="stylesheet" href="/CSS/sidebar.css">
     </head>
 
     <body>
@@ -13,7 +13,12 @@
 
                             <%- include('./dashboard/projects.ejs') %>
 
-                                <% } %>
+                                <% }
+                                else if(path=='/dashboard/create' ) {%>
+
+                                    <%- include('./dashboard/newProject.ejs') %>
+        
+                                        <% } %>
                     </section>
             </main>
     </body>

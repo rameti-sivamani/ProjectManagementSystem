@@ -139,3 +139,31 @@ main .main-content {
 .btn-view:hover {
   background-color: #0056b3;
 }
+
+
+.delete-project,.edit-project
+{
+  position:absolute;
+  top: 8px;
+  right:10px;
+  width: 50px;
+  height: 20px;
+  border-radius: 5px;
+  background: red;
+  color: white;
+  font-size: small;
+}
+.edit-project{
+  top: 8px;
+  right:70px;
+  background: rgb(7, 120, 226);
+
+}
+.delete-form,.edit-form{
+  display: none;
+}
+
+.project-card:hover .edit-form,
+.project-card:hover .delete-form{
+  display:flex;
+}
