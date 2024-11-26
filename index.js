@@ -8,11 +8,12 @@ const path = require("path");
 const db = require("./utils/db");
 const bodyParser = require("body-parser");
 const mongoDBStore = require("connect-mongodb-session")(session);
-const verifyToken = require("./middleware/verify");
+const middleware = require("./middleware/verify");
 
 //Routes
 const normalRoutes = require("./routes/normal");
 const dashboard = require("./routes/dashboard");
+
 
 //Template engines
 app.set("view engine", "ejs");
@@ -31,13 +32,10 @@ app.use(
     saveUninitialized: true,
   })
 );
-
 app.use(flash());
-app.use("/dashboard", verifyToken, dashboard);
+app.use("/dashboard", middleware.verifyToken, dashboard);
 
-app.use("/", normalRoutes);
-
-
+app.use("/", middleware.TokenAvailable, normalRoutes);
 
 app.listen("3000", () => {
   console.log("Listening at port 3000");

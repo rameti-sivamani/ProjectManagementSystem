@@ -1,0 +1,70 @@
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    font-size: 1rem;
+  }
+  
+  .pricing-plans {
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .plan {
+    background-color:transparent;
+    backdrop-filter:blur(15px);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgb(114, 110, 110);
+    text-align: center;
+    scale: 0.9;
+    flex: 1 250px;
+    transition: transform 0.2s ease-in-out;
+  }
+  .plan:hover{
+    scale: 1;
+    background: #b4ebe4;
+  }
+  
+  .plan h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  
+  .plan p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .plan ul {
+    list-style-type: none;
+    margin-bottom: 20px;
+  }
+  
+  .plan ul li {
+    font-size: 1rem;
+    margin: 5px 0;
+  }
+  
+  .cta {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .cta:hover {
+    background-color: #0056b3;
+  }
+  

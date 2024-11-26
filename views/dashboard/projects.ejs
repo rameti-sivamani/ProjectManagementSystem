@@ -33,7 +33,9 @@
 
         <!-- View Project Button -->
         <div class="view-button">
-          <a href="/projects/<%= project._id %>" class="btn-view">View Project</a>
+          <form action="/dashboard/projects/<%= project._id %>">
+            <button type="submit" class="btn-view">View Project</button>
+          </form>
         </div>
 
         <% if (project.team.length>1){ %>
@@ -48,6 +50,7 @@
               <% }%>
                 <% }); %>
                   <% }%>
+
       </div>
       <% }); %>
         <% } else { %>

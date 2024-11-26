@@ -112,3 +112,26 @@ button:hover {
   border-left: 1px solid grey;
   place-content: center;
 }
+
+
+.pagination{
+  margin-top: 20px;
+}
+.pagination a{
+  padding: 10px 30px;
+  border :1px solid #ddd;
+  text-decoration: none;
+}
+.pagination a:hover,
+.pagination a.active{
+  background: #7eccff;
+}
+
+.main-content .projects{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+}

@@ -1,8 +1,7 @@
 <%- include('./layouts/head.ejs') %>
 
-    <link rel="stylesheet" href="./CSS/registration.css">
-    <link rel="stylesheet" href="./CSS/form-styles.css">
-
+    <link rel="stylesheet" href="/CSS/registration.css">
+    <link rel="stylesheet" href="/CSS/form-styles.css">
     </head>
 
     <body>
@@ -52,37 +51,11 @@
                                             <%= path=='/register' ? "Login" : "Register" %>
                                         </a>
                                     </p>
-
-                                    <hr width="100%">
-                                    <p>or</p>
-                                    <p>
-                                        <%= path=='/login' ? "Login" : "Register" %> Using
-                                    </p>
-
-                                    <div class="social-link">
-                                        <button type="button">Google</button>
-                                        <button type="button">Facebook</button>
-                                    </div>
                 </form>
-           
-
-
-
 
             </main>
 
 
-
-            <% if (message) { %>
-                <div id="toast" class="toast show">
-                    <span>
-                        <%= message[0] %>
-                    </span>
-                </div>
-            <% } %>
-            <script src="form-validation.js"></script>
-
-           
     </body>
 
     </html>

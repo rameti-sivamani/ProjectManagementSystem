@@ -1,26 +1,63 @@
 <%- include('./layouts/head.ejs') %>
-    <link rel="stylesheet" href="/CSS/dash-nav.css">
-    <link rel="stylesheet" href="/CSS/sidebar.css">
-    </head>
+  <link rel="stylesheet" href="/CSS/dash-nav.css">
+  <link rel="stylesheet" href="/CSS/sidebar.css">
+  <link rel="stylesheet" href="/CSS/projectView.css">
+  </head>
 
-    <body>
+  <body>
 
-        <%- include('./dashboard/navbar.ejs') %>
-            <main>
-                <%- include('./dashboard/sidebar.ejs') %>
-                    <section class="main-content">
-                        <% if(path=='/dashboard' ) {%>
+    <%- include('./dashboard/navbar.ejs') %>
+      <main>
+        <%- include('./dashboard/sidebar.ejs') %>
+          <section class="main-content">
 
-                            <%- include('./dashboard/projects.ejs') %>
+            <% if(path=='/dashboard' ) {%>
+              <section class="projects">
+                <%- include('./dashboard/projects.ejs') %>
+              </section>
+              <%if (projects.length>0){ %>
+                <section class="pagination">
+                  <% if(currentPage!==1 && previousPage !==1){ %>
+                    <a href="/dashboard/?page=1">1</a>
+                    <% } %>
+                      <% if((currentPage-1)>2 && hasPreviousPage){ %>
+                        <a href="">...</a>
+                        <% } %>
+                          <% if(hasPreviousPage){ %>
+                            <a href="/dashboard/?page=<%= previousPage %>">
+                              <%= previousPage %>
+                            </a>
+                            <% } %>
+                              <a href="/dashboard/?page=<%=currentPage %>" class="active">
+                                <%= currentPage %>
+                              </a>
 
-                                <% }
-                                else if(path=='/dashboard/create' ) {%>
+                              <% if(hasNextPage){ %>
+                                <a href="/dashboard/?page=<%= nextPage %>">
+                                  <%= nextPage %>
+                                </a>
+                                <% } %>
+                                  <% if((nextPage+1)< lastPage && hasNextPage){ %>
+                                    <a href="">...</a>
+                                    <% } %>
 
-                                    <%- include('./dashboard/newProject.ejs') %>
-        
+                                      <% if(nextPage!==lastPage && lastPage!==currentPage){ %>
+                                        <a href="/dashboard/?page=<%= lastPage %>">
+                                          <%= lastPage %>
+                                        </a>
                                         <% } %>
-                    </section>
-            </main>
-    </body>
 
-    </html>
+                </section>
+                <%}%>
+                  <% } else if(path=='/dashboard/create' ) {%>
+                    <%- include('./dashboard/newProject.ejs') %>
+
+                      <% } else if(path=='/dashboard/projectId' ) {%>
+                        <%- include('./dashboard/projectView.ejs') %>
+
+                          <% } %>
+          </section>
+      </main>
+  </body>
+
+  </html>

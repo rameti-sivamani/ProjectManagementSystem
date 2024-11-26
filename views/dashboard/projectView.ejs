@@ -1,0 +1,194 @@
+<Section class="project-view">
+    <section class="resources task-cat-card">
+        <h1 class="task-title">
+            Resources
+        </h1>
+    </section>
+    <section class="not-started-tasks task-cat-card">
+        <div class="header-task">
+            <h1 class="task-title">
+                Not Started
+            </h1>
+        </div>
+        <div class="tasks-container">
+            <% if(tasks.length>0){ %>
+                <% tasks.forEach(task=>{ %>
+                    <% if(task.taskCategory=="notStarted" ){ %>
+                        <div class="task-card">
+                            <h2 class="task-title">
+                                <%= task.taskTitle %>
+                            </h2>
+                            <p class="task-desc">
+                                <%= task.taskDescription %>
+                            </p>
+                            <p class="task-deadline">
+                                <%= task.taskDeadline %>
+                            </p>
+
+                            <% project.team.forEach(member=> { %>
+                                <% if (member.email==owner&& member.role=='owner' ){ %>
+                                    <form action="/dashboard/<%=project._id%>/edit" method="post" class="edit-form">
+                                        <button class="edit-project"> Edit</button>
+                                    </form>
+                                    <form action="/dashboard/<%=project._id%>/delete" method="post" class="delete-form">
+                                        <button class="delete-project"> Delete</button>
+                                    </form>
+
+                                    <% }%>
+                                        <form
+                                            action="/dashboard/projects/<%=project._id%>/tasks/<%=task.taskId %>/updateCategory"
+                                            method="post" class="start-form">
+                                            <input type="hidden" name="taskCategory" value="onGoing">
+                                            <button class="start-task" type="submit">Start</button>
+                                        </form>
+                                        <% }) %>
+
+                        </div>
+                        <% } %>
+                            <%}) } else{ %>
+                                <p class="no-tasks">
+                                    No tasks found
+                                </p>
+                                <% } %>
+        </div>
+        <hr width="100%" style="height: 3px; background: gray;">
+        <div>
+            <% project.team.forEach(member=> { %>
+                <% if (member.email==owner&& member.role=='owner' ){ %>
+                    <!-- <form action="/dashboard/projects/<%= project._id %>/newTask" method="post"> -->
+                    <button onclick="taskAdd()" id="newTask">New Task</button>
+                    <!-- // </form> -->
+                    <% }})%>
+                        <script>
+                            function taskAdd() {
+                                const taskAdd = document.querySelector(".task-add");
+                                taskAdd.style.display = "flex";
+                                const projectView = document.querySelector(".project-view");
+                                projectView.style.backdropFilter="blur(30px)";
+                                }
+                        </script>
+        </div>
+
+    </section>
+
+    <section class="ongoing-tasks task-cat-card">
+        <div class="header-task">
+            <h1 class="task-title">
+                On Going
+            </h1>
+        </div>
+        <div class="tasks-container">
+            <% if(tasks.length>0){ %>
+                <% tasks.forEach(task=>{ %>
+                    <% if(task.taskCategory=="onGoing" ){ %>
+                        <div class="task-card">
+                            <h2 class="task-title">
+                                <%= task.taskTitle %>
+                            </h2>
+                            <p class="task-desc">
+                                <%= task.taskDescription %>
+                            </p>
+                            <p class="task-deadline">
+                                <%= task.taskDeadline %>
+                            </p>
+
+                            <% project.team.forEach(member=> { %>
+                                <% if (member.email==owner&& member.role=='owner' ){ %>
+                                    <form action="/dashboard/<%=project._id%>/edit" method="post" class="edit-form">
+                                        <button class="edit-project"> Edit</button>
+                                    </form>
+                                    <form action="/dashboard/<%=project._id%>/delete" method="post" class="delete-form">
+                                        <button class="delete-project"> Delete</button>
+                                    </form>
+
+                                    <% }%>
+                                        <form
+                                            action="/dashboard/projects/<%=project._id%>/tasks/<%=task.taskId %>/updateCategory"
+                                            method="post" class="start-form">
+                                            <input type="hidden" name="taskCategory" value="completed">
+                                            <button class="start-task" type="submit">Completed</button>
+                                        </form>
+                                        <% }) %>
+
+
+                        </div>
+                        <% } %>
+                            <%}) } else{ %>
+                                <p class="no-tasks">
+                                    No tasks found
+                                </p>
+                                <% } %>
+        </div>
+    </section>
+    <section class="completed-tasks task-cat-card">
+        <div class="header-task">
+            <h1 class="task-title">
+                On Going
+            </h1>
+        </div>
+        <div class="tasks-container">
+            <% if(tasks.length>0){ %>
+                <% tasks.forEach(task=>{ %>
+                    <% if(task.taskCategory=="completed" ){ %>
+                        <div class="task-card">
+                            <h2 class="task-title">
+                                <%= task.taskTitle %>
+                            </h2>
+                            <p class="task-desc">
+                                <%= task.taskDescription %>
+                            </p>
+                            <p class="task-deadline">
+                                <%= task.taskDeadline %>
+                            </p>
+
+                            <!-- <% project.team.forEach(member=> { %>
+                                <% if (member.email==owner&& member.role=='owner' ){ %>
+                                    <form action="/dashboard/<%=project._id%>/edit" method="post" class="edit-form">
+                                        <button class="edit-project"> Edit</button>
+                                    </form>
+                                    <form action="/dashboard/<%=project._id%>/delete" method="post" class="delete-form">
+                                        <button class="delete-project"> Delete</button>
+                                    </form>
+                                    <form
+                                        action="/dashboard/projects/<%=project._id%>/tasks/<%=task.taskId %>/updateCategory"
+                                        method="post" class="start-form">
+                                        <input type="hidden" name="taskCategory" value="completed">
+                                        <button class="start-task" type="submit">Completed</button>
+                                    </form>
+                                    <% }%>
+                               <% }) %> -->
+
+                        </div>
+                        <% } %>
+                            <%}) } else{ %>
+                                <p class="no-tasks">
+                                    No tasks found
+                                </p>
+                                <% } %>
+        </div>
+    </section>
+
+
+
+    <section class="task-add">
+        <form action="/dashboard/projects/<%= project._id %>/newTask" method="post" class="task-add-form">
+            <label for="taskTitle">Title :</label>
+            <input type="text" name="taskTitle" id="taskTitle">
+            <label for="taskDescription">Description :</label>
+            <input type="text" name="taskDescription" id="taskDescription">
+            <label for="taskDeadline">Deadline :</label>
+            <input type="date" name="taskDeadline" id="taskDeadline">
+            <div>
+                <input type="submit" value="Submit">
+                <button type="reset" onclick="closeTask()">Cancel</button>
+            </div>
+        </form>
+        
+        <script>
+            function closeTask(){
+                const taskAdd = document.querySelector(".task-add");
+                taskAdd.style.display = "none";
+            }
+        </script>
+    </section>
+</Section>

@@ -1,0 +1,120 @@
+.project-view {
+    width: 100%;
+    padding: 20px;
+    height: calc(100vh - 100px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+flex-wrap: nowrap;
+overflow-x: scroll;
+
+scrollbar-width: none;
+}
+
+.project-view .task-cat-card {
+    min-width: 350px;
+    height: 500px;
+    flex-grow: 1;
+    max-width: 400px;
+    background: #53daf5;
+    border-radius: 20px;
+    box-shadow: 2px 4px 5px gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+}
+
+.task-cat-card .header-task {
+    width: 100%;
+    background: #00a115;
+    text-align: center;
+}
+
+.task-cat-card button#newTask {
+    padding: 10px 0;
+    /* background: #ff7e7e; */
+    width: 100%;
+    text-align: center;
+}
+
+.tasks-container {
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    width: 100%;
+    height: 90%;
+}
+
+.task-card {
+    position: relative;
+    width: 100%;
+    background: rgba(230, 226, 226, 0.6);
+    padding: 10px 10px;
+    box-shadow: 2px 4px 10px grey;
+}
+
+.task-title {
+    margin: 10px 0;
+    font-size: 26px;
+}
+
+.task-card:hover .edit-form,
+.task-card:hover .delete-form {
+    display: block;
+}
+
+.task-add {
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid grey;
+    height: 100%;
+    background: rgb(154, 154, 154, 0.6);
+    backdrop-filter: blur(30px);
+    align-items: center;
+    justify-content: center;
+    animation: slide 2s both ease-in-out;
+}
+
+@keyframes slide {
+    0% {
+        top: -100vh;
+    }
+
+    100% {
+        top: 0;
+    }
+}
+
+
+.task-add-form {
+    display: flex;
+    width: 100%;
+    max-width: 300px;
+    height: max-content;
+    background: #ffffff;
+    flex-direction: column;
+    padding: 20px ;
+    gap: 10px;
+
+}
+.task-add-form input{
+    height: 40px;
+}
+.task-add-form input[type="submit"]{
+    background: #fba9a9;
+    width: fit-content;
+    padding: 5px 10px;
+    align-self: center;
+}

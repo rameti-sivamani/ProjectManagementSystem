@@ -35,7 +35,7 @@ const ProjectSchema = new Schema(
             type: Array,
             default: [],
         },
-    },
+    }, 
     {
         timestamps: true,
     }

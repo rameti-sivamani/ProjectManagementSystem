@@ -1,29 +1,84 @@
 <%- include('./layouts/head.ejs') %>
     <link rel="stylesheet" href="./CSS/index.css">
+    <link rel="stylesheet" href="/CSS/features.css">
+    <link rel="stylesheet" href="/CSS/pricing.css">
+    <link rel="stylesheet" href="/CSS/footer.css">
     </head>
-<body>
-    <%- include('./layouts/navbar.ejs') %>
-    <main class="main-content">
-        <section class="main-intro">
-                <article>
-                    <img src="./Images/u6eewgjm.png" alt="Nothing">
-                </article>
-                <article>
-                    <div class="form-control">
-                        <h1>Welcome to<span id="brand-name"> Essence Flow!</span>
-                        </h1>
-                        <h2>Please register for an account to quickly unlock all the features for seamless project
-                            management.</h2>
+
+    <body id="home">
+        <%- include('./layouts/navbar.ejs') %>
+            <main class="main-content">
+                <section class="main-intro" >
+                    <article>
+                        <img src="./Images/u6eewgjm.png" alt="Nothing">
+                    </article>
+                    <article>
+                        <div class="form-control">
+                            <h1>Welcome to<span id="brand-name"> Essence Flow!</span>
+                            </h1>
+                            <h2>Please register for an account to quickly unlock all the features for seamless project
+                                management.</h2>
+                        </div>
+
+
+                        <form action="" class="form-control">
+                            <input type="email" id="email" name="email" placeholder="Enter your email">
+                            <input type="submit" id="submit">
+                        </form>
+                    </article>
+
+                </section>
+                <section id="features">
+                    <%- include('./layouts/features.ejs') %>
+                </section>
+                <hr style="margin:0px 30px; height: 3px; background: #000;">
+                <section id="pricing">
+                    <%- include('./layouts/pricing.ejs') %>
+                </section>
+            </main>
+            <footer class="footer" id="footer">
+                <!-- Top Section with Three Columns -->
+                <div class="footer-top">
+                    <!-- Column 1: Brand Logo and Motive -->
+                    <div class="footer-column">
+                        <img src="/Images/download.png" alt="Brand Logo" class="footer-logo">
+                        <p>Project Manager Pro simplifies teamwork and project management by offering powerful,
+                            intuitive tools for organizing, tracking, and completing projects efficiently.</p>
                     </div>
+                    <!-- Column 2: Links -->
+                    <div class="footer-column">
+                        <h2>Quick Links</h2>
+                        <ul class="footer-links">
+                            <li><i class="fa-solid fa-house" style="color: #0b64fe;"></i> <a href="#home">Home</a></li>
+                            <li><i class="fa-solid fa-wand-magic-sparkles" style="color: #005eff;"></i> <a href="#features">Features</a></li>
+                            <li><i class="fa-solid fa-dollar-sign" style="color: #005eff;"></i> <a href="#pricing">Plans</a></li>
+                            <li><i class="fa-solid fa-question" style="color: #0050db;"></i> <a href="#faq">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 3: Contact Us -->
+                    <div class="footer-column">
+                        <h2>Contact Us</h2>
+                        <p>Email: <a href="mailto:rametisivamani494@gmail.com">support@essenceflow.com</a></p>
+                        <p>Phone: +91 8374262109</p>
+                        
+                    </div>
+                    <div class="footer-column">
+                        <h2>Follow Us</h2>
+
+                        <p><i class="fa-brands fa-x-twitter" style="color: #000000;"></i> <a href="https://twitter.com">Twitter</a></p>
+                        <p><i class="fa-brands fa-instagram" style="color: #ff00dd;"></i> <a href="https://twitter.com">Instagram</a></p>
+                        <p><i class="fa-brands fa-facebook" style="color: #4000ff;"></i> <a href="">Facebook</a></p>
+                        <p><i class="fa-brands fa-threads" style="color: #000000;"></i> <a href="">Threads</a></p>
+
+                    </div>
+                </div>
+                <!-- Bottom Section -->
+                <div class="footer-bottom">
+                    <p>&copy; 2024 Essence Flow. All Rights Reserved.</p>
+                </div>
+            </footer>
 
 
-                    <form action="" class="form-control">
-                        <input type="email" id="email" name="email" placeholder="Enter your email">
-                        <input type="submit" id="submit">
-                    </form>
-                </article>
-
-            </section>
-        </main>
     </body>
+
     </html>

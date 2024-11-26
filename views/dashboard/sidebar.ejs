@@ -1,11 +1,18 @@
 <section class="sidebar">
     <ul class="sidebar-items">
-        <li class="sidebar-item <%= (path =='/dashboard')?'active':'' %>"><a href="/dashboard">Dashboard</a></li>
-        <li class="sidebar-item"><a href="/projects">My projects</a></li>
-        <li class="sidebar-item"><a href="/teams">Teams</a></li>
-        <li class="sidebar-item"><a href="/reports">reports</a></li>
-        <li class="sidebar-item"><a href="/calender">Calender</a></li>
-        <li class="sidebar-item"><a href="/support">Help & Support</a></li>
-        <li class="sidebar-item"><a href="/settings">Settings</a></li>
+        <li class="sidebar-item <%= (path =='/dashboard')?'active':'' %>"><a href="/dashboard"> <i class="fa-solid fa-gauge" style="color: #4287ff;"></i> Dashboard</a></li>
+        <li class="sidebar-item"><a href="/projects"><i class="fa-solid fa-list-check" style="color: #005eff;"></i> My projects</a></li>
+        <li class="sidebar-item"><a href="/teams"><i class="fa-solid fa-group-arrows-rotate" style="color: #0c59df;"></i> Teams</a></li>
+        <!-- <li class="sidebar-item"><a href="/reports">reports</a></li> -->
+        <li class="sidebar-item"><a href="/calender"><i class="fa-regular fa-calendar-days" style="color: #005cfa;"></i> Calender</a></li>
+        <li class="sidebar-item"><a href="/support"><i class="fa-solid fa-handshake-angle" style="color: #146aff;"></i> Help & Support</a></li>
+        <li class="sidebar-item"><a href="/settings"><i class="fa-solid fa-gears" style="color: #005eff;"></i> Settings</a></li>
+        <!-- <li class="collapse-expand" onclick="collapseSidebar()">&LeftAngleBracket;</li> -->
     </ul>
+    <!-- <script>
+        function collapseSidebar(){
+            var sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle("collapse");
+        }
+    </script> -->
 </section>
