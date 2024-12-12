@@ -100,14 +100,14 @@ Project.updateTaskCategory = (req, res, next) => {
   const projectId = req.params.projectId;
   const taskId = req.params.taskId;
   const taskCategory = req.body.taskCategory;
-  console.log(taskId,taskCategory);
+  console.log(taskId, taskCategory);
   Project.updateOne(
     { _id: projectId, "tasks.taskId": taskId },
     {
       $set: { "tasks.$.taskCategory": taskCategory },
     },
     {
-      new: true
+      new: true,
     }
   )
     .then((result) => {
@@ -118,5 +118,54 @@ Project.updateTaskCategory = (req, res, next) => {
       console.log(err);
     });
 };
+const Items_Per_Page=2;
+Project.displayTeams = (req, res, next) => {
+  const page = +req.query.page || 1;
+  let totalProjects = 0;
+  const email = req.user.email;
+  Project.find({ "team.email": email })
+    .countDocuments()
+    .then((numProjects) => {
+      totalProjects = numProjects;
+      return Project.find({ "team.email": email })
+        .skip((page - 1) * Items_Per_Page)
+        .limit(Items_Per_Page);
+    })
+    .then((projects) => {
+      res.render("dashboard", {
+        title: "Teams",
+        projects: projects,
+        path: "/dashboard/teams",
+        owner: email,
+        currentPage: page,
+        hasNextPage: Items_Per_Page * page < totalProjects,
+        hasPreviousPage: page > 1,
+        nextPage: page + 1,
+        previousPage: page - 1,
+        lastPage: Math.ceil(totalProjects / Items_Per_Page),
+      });
+    }); 
+};
+
+
+Project.displayReports=(req,res,next)=>{
+  let totalProjects = 0;
+  const email = req.user.email;
+  Project.find({ "team.email": email })
+    .countDocuments()
+    .then((numProjects) => {
+      totalProjects = numProjects;
+      return Project.find({ "team.email": email })
+    })
+    .then((projects) => {
+      res.render("dashboard", {
+        title: "Reports",
+        projects: projects,
+        path: "/dashboard/reports",
+        owner: email,
+      });
+    }); 
+}
+
 
 module.exports = Project;

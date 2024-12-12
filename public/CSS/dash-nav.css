@@ -28,8 +28,9 @@
 }
 
 .navbar-center {
-  min-width: 100px;
-  flex: 2;
+  min-width: 50px;
+  flex: 3;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -40,12 +41,13 @@
   border-radius: 25px;
   border: none;
   font-size: 16px;
+  outline: none;
 }
 
 .navbar-right {
-  flex: 3;
+  flex: 2;
   display: flex;
-  justify-content: space-between;
+  justify-content:flex-end;
   align-items: center;
   gap: 30px;
   font-size: 20px;

@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
     pass: "zsiz iqux drww uoia", // replace with your email password or app password
   },
 });
-
+ 
 require("dotenv").config();
 
 const User = require("../models/User");

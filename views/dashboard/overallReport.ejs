@@ -1,0 +1,54 @@
+<section class="reports">
+    <h1 style="text-align: center; margin: 30px; font-size: 2rem;">Project Wise Reports</h1>
+    <section class="project-wise-reports">
+        <% if (projects.length> 0) { %>
+            <% projects.forEach((project)=> { %>
+
+                <section class="overall-report" style="width: 300px;">
+                    <h2>
+                        <%= project.title %> Report
+                    </h2>
+                    <hr style="margin: 2px 20px;">
+                    <ul>
+                        <% let completedCount=0; let ongoingCount=0; project.tasks.forEach(task=> {
+                            if (task.taskCategory === "completed") {
+                            completedCount++;
+                            } else if (task.taskCategory === "onGoing") {
+                            ongoingCount++;
+                            }
+                            });
+                            const totalTasks = project.tasks.length;
+                            const completedPercentage = totalTasks > 0 ? (completedCount / totalTasks * 100).toFixed(2)
+                            : 0;
+                            const ongoingPercentage = totalTasks > 0 ? (ongoingCount / totalTasks * 100).toFixed(2) : 0;
+                            %>
+                            <% if(totalTasks>0){ %>
+                                <li style="width: 100%; background: rgb(19, 120, 244); ">
+                                    <a style="min-width: max-content; display: block;">Total Tasks: <%= totalTasks %>
+                                    </a>
+                                </li>
+
+
+                                <li style="width: <%= completedPercentage %>%; background:orange ; ">
+                                    <a style="min-width: max-content; display: block;">Completed Tasks: <%=
+                                            completedCount %></a>
+                                </li>
+
+                                <li style="width: <%= ongoingPercentage %>%; background: green;">
+                                    <a style="min-width: max-content; display: block;"> Ongoing Tasks: <%= ongoingCount
+                                            %></a>
+                                </li>
+                                <% }else{ %>
+                                    <li class="noTasks">No tasks in the Project</li>
+                                    <%}%>
+
+
+                    </ul>
+                </section>
+                <% }) %>
+                    <% } else { %>
+                        <p>No projects available.</p>
+                        <% } %>
+    </section>
+
+</section>

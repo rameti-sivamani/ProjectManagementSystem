@@ -5,8 +5,18 @@ const project=require('../controllers/project')
 
 //get requests
 app.get('/',dashboard.home);
-app.get('/create',project.createNewProject)
-app.get('/projects/:projectId',project.viewProject)
+app.get('/create',project.createNewProject);
+app.get('/projects/:projectId',project.viewProject);
+app.get('/teams',project.displayTeams);
+app.get('/reports',project.displayReports)
+app.get('/support',(req,res,next)=>{
+    res.render('dashboard',
+        {
+            title:'Help & Support',
+            path:"/dashboard/support"
+        }
+    )
+})
 
 
 //post requests

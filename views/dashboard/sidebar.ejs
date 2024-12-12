@@ -1,12 +1,15 @@
 <section class="sidebar">
     <ul class="sidebar-items">
         <li class="sidebar-item <%= (path =='/dashboard')?'active':'' %>"><a href="/dashboard"> <i class="fa-solid fa-gauge" style="color: #4287ff;"></i> Dashboard</a></li>
-        <li class="sidebar-item"><a href="/projects"><i class="fa-solid fa-list-check" style="color: #005eff;"></i> My projects</a></li>
-        <li class="sidebar-item"><a href="/teams"><i class="fa-solid fa-group-arrows-rotate" style="color: #0c59df;"></i> Teams</a></li>
-        <!-- <li class="sidebar-item"><a href="/reports">reports</a></li> -->
-        <li class="sidebar-item"><a href="/calender"><i class="fa-regular fa-calendar-days" style="color: #005cfa;"></i> Calender</a></li>
-        <li class="sidebar-item"><a href="/support"><i class="fa-solid fa-handshake-angle" style="color: #146aff;"></i> Help & Support</a></li>
-        <li class="sidebar-item"><a href="/settings"><i class="fa-solid fa-gears" style="color: #005eff;"></i> Settings</a></li>
+        <li class="sidebar-item <%= (path =='/dashboard/myProjects')?'active':'' %>"><a href="/projects"><i class="fa-solid fa-list-check" style="color: #005eff;"></i> My projects</a></li>
+        <li class="sidebar-item <%= (path =='/dashboard/teams')?'active':'' %>"><a href="/dashboard/teams"><i class="fa-solid fa-group-arrows-rotate" style="color: #0c59df;"></i> Teams</a></li>
+        <li class="sidebar-item <%= (path =='/dashboard/reports')?'active':'' %>"><a href="/dashboard/reports"><i class="fa-regular fa-chart-bar" style="color: #2e7bff;"></i> Reports</a></li>
+        <!-- <li class="sidebar-item"><a href="/calender"><i class="fa-regular fa-calendar-days" style="color: #005cfa;"></i> Calender</a></li> -->
+        <li class="sidebar-item <%= (path =='/dashboard/support')?'active':'' %>"><a href="/dashboard/support"><i class="fa-solid fa-handshake-angle" style="color: #146aff;"></i> Help & Support</a></li>
+        <li class="sidebar-item <%= (path =='/dashboard/logout')?'active':'' %>" style="padding: 0; padding-left: 40px;margin: 0;"> <a href="#"> <form action="/dashboard/logout" method="post" style="margin: 0; padding: 0;">
+            <button style="margin: 0;"><i class="fas fa-sign-out-alt" style="color: #146aff;"></i> Logout</button>   
+          </form>
+        </a></li>
         <!-- <li class="collapse-expand" onclick="collapseSidebar()">&LeftAngleBracket;</li> -->
     </ul>
     <!-- <script>

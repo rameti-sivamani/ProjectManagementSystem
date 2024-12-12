@@ -1,0 +1,34 @@
+<%if (projects.length>0){ %>
+    <section class="pagination">
+      <% if(currentPage!==1 && previousPage !==1){ %>
+        <a href="<%=path %>/?page=1">1</a>
+        <% } %>
+          <% if((currentPage-1)>2 && hasPreviousPage){ %>
+            <a href="">...</a>
+            <% } %>
+              <% if(hasPreviousPage){ %>
+                <a href="<%=path %>/?page=<%= previousPage %>">
+                  <%= previousPage %>
+                </a>
+                <% } %>
+                  <a href="<%=path %>/?page=<%=currentPage %>" class="active">
+                    <%= currentPage %>
+                  </a>
+
+                  <% if(hasNextPage){ %>
+                    <a href="<%=path %>/?page=<%= nextPage %>">
+                      <%= nextPage %>
+                    </a>
+                    <% } %>
+                      <% if((nextPage+1)< lastPage && hasNextPage){ %>
+                        <a href="">...</a>
+                        <% } %>
+
+                          <% if(nextPage!==lastPage && lastPage!==currentPage){ %>
+                            <a href="<%=path %>/?page=<%= lastPage %>">
+                              <%= lastPage %>
+                            </a>
+                            <% } %>
+
+    </section>
+    <%}%>

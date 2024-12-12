@@ -36,4 +36,9 @@ dashboard.logout = (req, res, next) => {
   req.flash("message", "Successfully Logged out");
   res.redirect("/?message=Successfully logged out!");
 };
+
+
+
+
+
 module.exports = dashboard;

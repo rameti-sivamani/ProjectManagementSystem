@@ -2,6 +2,8 @@
   <link rel="stylesheet" href="/CSS/dash-nav.css">
   <link rel="stylesheet" href="/CSS/sidebar.css">
   <link rel="stylesheet" href="/CSS/projectView.css">
+  <link rel="stylesheet" href="/CSS/reports.css">
+  <link rel="stylesheet" href="/CSS/support.css">
   </head>
 
   <body>
@@ -15,47 +17,24 @@
               <section class="projects">
                 <%- include('./dashboard/projects.ejs') %>
               </section>
-              <%if (projects.length>0){ %>
-                <section class="pagination">
-                  <% if(currentPage!==1 && previousPage !==1){ %>
-                    <a href="/dashboard/?page=1">1</a>
-                    <% } %>
-                      <% if((currentPage-1)>2 && hasPreviousPage){ %>
-                        <a href="">...</a>
-                        <% } %>
-                          <% if(hasPreviousPage){ %>
-                            <a href="/dashboard/?page=<%= previousPage %>">
-                              <%= previousPage %>
-                            </a>
-                            <% } %>
-                              <a href="/dashboard/?page=<%=currentPage %>" class="active">
-                                <%= currentPage %>
-                              </a>
-
-                              <% if(hasNextPage){ %>
-                                <a href="/dashboard/?page=<%= nextPage %>">
-                                  <%= nextPage %>
-                                </a>
-                                <% } %>
-                                  <% if((nextPage+1)< lastPage && hasNextPage){ %>
-                                    <a href="">...</a>
-                                    <% } %>
-
-                                      <% if(nextPage!==lastPage && lastPage!==currentPage){ %>
-                                        <a href="/dashboard/?page=<%= lastPage %>">
-                                          <%= lastPage %>
-                                        </a>
-                                        <% } %>
-
-                </section>
-                <%}%>
+              <%- include('./dashboard/pagination.ejs') %>
                   <% } else if(path=='/dashboard/create' ) {%>
                     <%- include('./dashboard/newProject.ejs') %>
 
                       <% } else if(path=='/dashboard/projectId' ) {%>
                         <%- include('./dashboard/projectView.ejs') %>
 
-                          <% } %>
+                          <% } else if(path=='/dashboard/myProjects' ){ %>
+
+                            <%} else if(path=='/dashboard/teams' ){%>
+                              <%- include('./dashboard/teams.ejs') %>
+                              <%- include('./dashboard/pagination.ejs') %>
+
+                                <%} else if(path=='/dashboard/reports' ){%>
+                                  <%- include('./dashboard/overallReport.ejs') %>
+                                  <%} else if(path=='/dashboard/support'){%>
+                                    <%- include('./dashboard/HelpAndSupport.ejs') %>
+                                    <%}%>
           </section>
       </main>
   </body>
