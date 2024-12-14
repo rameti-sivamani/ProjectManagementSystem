@@ -1,23 +1,30 @@
 <section class="project-card new-project">
     <form action="/dashboard/create" method="post" class="project-create-form">
-        
-        <h1 style="text-align: center; font-size: larger; margin:10px 0px 20px 0px">Create A New Project</h1>
+
+        <h1 style="text-align: center; font-size: larger; margin:10px 0px 20px 0px">
+            <%= path=="/project/edit" ?" Edit Project":" Create New Project" %>
+        </h1>
+        <% if( path=="/project/edit"){%> 
+        <input type="hidden" name="projectId" value="<%=project._id %>" >
+        <%}%>
         <div class="project-content">
             <label for="title">Title :</label>
-            <input type="text" name="title" id="title" required>
+            <input type="text" name="title" id="title" value="<%= path=="/project/edit"? project.title :"" %>" required>
         </div>
         <div class="project-content">
             <label for="description">Description :</label>
-            <input type="text" name="description" id="description" required>
+            <input type="text" name="description" id="description" value="<%= path=="/project/edit"? project.description :"" %>" required>
         </div>
         <div class="project-content">
             <label for="deadline">Deadline :</label>
-            <input type="date" name="deadline" id="deadline">
+            <input type="date" name="deadline" id="deadline" value="<%= path=="/project/edit"? project.deadline :"" %>" required>
         </div>
         <div class="project-content">
             <label for="members">Members :</label>
-            <input type="text" name="members" id="members" required>
+                <input type="text" name="members" id="members" value="<%= path=="/project/edit"? members :"" %>" required>
         </div>
-        <button type="submit">Create Project</button>
+        <button type="submit">
+            <%= path=="/project/edit" ?" Update Project":" Create Project" %>
+        </button>
 
 </section>

@@ -1,45 +1,37 @@
 <header class="main-header">
     <nav class="navbar">
         <div class="navbar-left">
-          <a href="#" class="brand-logo"><li class="navbar-item ">
+          <a href="/dashboard" class="brand-logo"><li class="navbar-item ">
             <img src="/Images/download.png" id="brand-logo" width="120px" height="80px" alt="EssenceFlow">
         </li></a>
         </div>
         
         <div class="navbar-center">
-          <form action="/search" method="get">
-            <input type="text" class="search-bar" placeholder="Search...">
+          <form action="/dashboard/search" method="get">
+            <input type="text" class="search-bar" name="find" placeholder="Search...">
             <button type="submit" id="search-btn"><i class="fa-brands fa-searchengin"></i></button>
           </form>
         </div>
         
         <div class="navbar-right">
-            <a href="/dashboard/create">
+            <a href="/dashboard/create" style="min-width: fit-content;" class="<%= (path =='/dashboard/create')?'active':'' %>"  >
               <button class="add-icon" >
                 <i class="fa-solid fa-plus" style="color: #005eff;"></i> New Project
               </button>
             </a>          
          
-          <!-- Calendar Icon -->
-          <!-- <button class="calendar-icon" aria-label="Calendar">
-            <i class="fa-solid fa-calendar-days" style="color: #005eff;"></i> Calander
-          </button>
-       -->
+         
           <!-- Help Icon -->
-          <button class="help-icon" aria-label="Help">
-            <i class="fa-solid fa-handshake-angle" style="color: #005eff;"></i> Support
+          <button class="help-icon <%= (path =='/dashboard/support')?'active':'' %>">
+            <i class="fa-solid fa-handshake-angle" style="color: #005eff;"></i> <a href="/dashboard/support" style="text-decoration: none;">Support</a>
           </button>
       
-          <!-- Theme Switcher Icon
-          <button class="theme-switcher" aria-label="Theme Switcher" > 
-            <i class="fa-solid fa-moon" style="color: #005eff;"></i> Light
-          </button>
-       -->
+       
           <!-- User Profile Icon -->
          
-          <div class="user-profile">
-            <i class="fa-solid fa-user" style="color: #005eff;"></i> Profile    
-          </div>
+          <button class="user-profile <%= (path =='/profile')?'active':'' %>">
+            <i class="fa-solid fa-user" style="color: #005eff;"></i>  <a href="/dashboard/profile" style="text-decoration: none;">Profile</a> 
+          </button>
         </div>
       </nav>
       

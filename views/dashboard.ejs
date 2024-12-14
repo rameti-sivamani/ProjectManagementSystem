@@ -4,39 +4,60 @@
   <link rel="stylesheet" href="/CSS/projectView.css">
   <link rel="stylesheet" href="/CSS/reports.css">
   <link rel="stylesheet" href="/CSS/support.css">
+  <link rel="stylesheet" href="/CSS/profile.css">
+  <link rel="icon" sizes="64x64" type="image/png"  href="/Images/image.png">
+
   </head>
 
   <body>
 
     <%- include('./dashboard/navbar.ejs') %>
       <main>
-        <%- include('./dashboard/sidebar.ejs') %>
-          <section class="main-content">
+        <% if(path!='/profile') {%>
+          <%- include('./dashboard/sidebar.ejs') %>
+          <%}%>
+          
+            <% if(path!='/profile') {%>
+              <section class="main-content">
+                <% if(path=='/dashboard' || path=='/dashboard/myProjects' ) {%>
+                  <section class="projects">
+                    <%- include('./dashboard/projects.ejs') %>
+                  </section>
+                  <%- include('./dashboard/pagination.ejs') %>
+                    <% } else if(path=='/dashboard/create' || path=='/project/edit' ) {%>
+                      <%- include('./dashboard/newProject.ejs') %>
 
-            <% if(path=='/dashboard' ) {%>
-              <section class="projects">
-                <%- include('./dashboard/projects.ejs') %>
+                        <% } else if(path=='/dashboard/projectId' ) {%>
+                          <%- include('./dashboard/projectView.ejs') %>
+                              <%} else if(path=='/dashboard/teams' ){%>
+                                <%- include('./dashboard/teams.ejs') %>
+                                  <%- include('./dashboard/pagination.ejs') %>
+
+                                    <%} else if(path=='/dashboard/reports' ){%>
+                                      <%- include('./dashboard/overallReport.ejs') %>
+                                        <%} else if(path=='/dashboard/support' ){%>
+                                          <%- include('./dashboard/HelpAndSupport.ejs') %>
+                                            <%} else if(path=='/dashboard/search' ){%>
+                                              <%- include('./dashboard/SearchResults.ejs') %>
+                                                <%}%>
               </section>
-              <%- include('./dashboard/pagination.ejs') %>
-                  <% } else if(path=='/dashboard/create' ) {%>
-                    <%- include('./dashboard/newProject.ejs') %>
-
-                      <% } else if(path=='/dashboard/projectId' ) {%>
-                        <%- include('./dashboard/projectView.ejs') %>
-
-                          <% } else if(path=='/dashboard/myProjects' ){ %>
-
-                            <%} else if(path=='/dashboard/teams' ){%>
-                              <%- include('./dashboard/teams.ejs') %>
-                              <%- include('./dashboard/pagination.ejs') %>
-
-                                <%} else if(path=='/dashboard/reports' ){%>
-                                  <%- include('./dashboard/overallReport.ejs') %>
-                                  <%} else if(path=='/dashboard/support'){%>
-                                    <%- include('./dashboard/HelpAndSupport.ejs') %>
-                                    <%}%>
-          </section>
+              <% }%>
+              <% if(path=='/profile') {%>
+                <%- include('./dashboard/Profile.ejs') %>
+                <%}%>
       </main>
+      <% if(message!=""){%>
+        <script>
+          const interval = setInterval(() => {
+              let redirectUrl = '<%= redirectUrl %>';
+              alert('<%= message %>');
+              if (redirectUrl) {
+                window.location.href = redirectUrl;
+                clearInterval(interval); // Stop the interval after redirection
+              }
+            }, 500);
+        </script>
+        <%}%>
   </body>
 
   </html>

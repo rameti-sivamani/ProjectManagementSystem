@@ -80,7 +80,7 @@ scrollbar-width: none;
     padding: 10px;
     border: 2px solid grey;
     height: 100%;
-    background: rgb(154, 154, 154, 0.6);
+    background: rgba(155, 255, 220, 0.6);
     backdrop-filter: blur(30px);
     align-items: center;
     justify-content: center;

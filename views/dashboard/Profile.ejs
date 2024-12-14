@@ -1,0 +1,43 @@
+<div class="profile-outer-container">
+
+    <div class="profile-container">
+        <h2>User Profile</h2>
+        <div class="profile-item">
+            <label>Full Name:</label>
+            <input type="text" value="<%= user.fullname %>" readonly>
+        </div>
+        <div class="profile-item">
+            <label>Email:</label>
+            <input type="email" value="<%= user.email %>" readonly>
+        </div>
+        <div class="profile-item">
+            <label>Joined Date:</label>
+            <input type="text" value="<%= user.createdAt.toISOString().substring(0,10) %>" readonly>
+        </div>
+        <div class="profile-item">
+            <label>Active Status:</label>
+            <% if (user.activeStatus) { %>
+                <span class="status">Active</span>
+                <% } else { %>
+                    <span class="status ">Active</span>
+                    <% } %>
+        </div>
+        <div class="profile-item">
+            <form action="/dashboard/updatePassword" method="POST">
+                <label for="currentPassword">Current Password:</label>
+                <input type="password" id="currentPassword" name="Password" required>
+                
+                <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+                
+                <button type="submit" style="background: blue; padding: 8px; border-radius: 5px;color: aliceblue; align-self: center;margin: 10px 0;" >Update Password</button>
+              </form>
+        </div>
+       
+        <div class="button-container" style="position: absolute; top: 10px; left: 10px;">
+            <!-- Go to Dashboard button -->
+            <button onclick="location.href='/dashboard'">Go to Dashboard</button>
+        </div>
+    </div>
+    
+</div>

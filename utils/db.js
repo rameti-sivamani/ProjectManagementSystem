@@ -1,7 +1,6 @@
 const mongoose = require("mongoose"); 
 mongoose.Promise = require("bluebird"); 
-const dbURI = 'mongodb://localhost:27017/';
-// 'mongodb+srv://testuser:test123@cluster0.s3vuxyh.mongodb.net/PMS';
+const dbURI = "mongodb+srv://testuser:test123@cluster0.s3vuxyh.mongodb.net/ProjectManagementSystem"
 mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

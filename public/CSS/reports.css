@@ -28,10 +28,11 @@ li a {
     display: flex;
     flex-direction: column;
     min-width: 400px;
-    background: #f3f3f3;
+    /* background: #f3f3f3; */
+background: #F5F7FA;
     aspect-ratio: 4/4;
-    border-left: 8px solid rgb(76, 82, 83);
-    border-bottom: 8px solid rgb(76, 82, 83);
+    border-left: 8px solid #40efff;
+    border-bottom: 8px solid #40efff;
     justify-content: space-evenly;
     border-radius: 8px;
     box-shadow: 0px 3px 6px grey ,

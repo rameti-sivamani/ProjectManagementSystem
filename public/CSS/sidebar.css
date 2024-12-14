@@ -49,7 +49,13 @@
 }
 
 
-
+.active{
+  min-width: fit-content;
+    background:rgb(169, 255, 223);
+    padding: 12px 8px;
+    border-radius: 15px;
+  
+}
 .sidebar .sidebar-items li.collapse-expand{
   position: absolute;
   top: 0;
@@ -86,6 +92,7 @@ main .main-content {
   width: 400px;
   justify-content: space-around;
   height: 350px;
+  min-height: fit-content;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
@@ -201,6 +208,7 @@ main .main-content {
   height: 100%;
   display: flex;
   flex-direction: column;
+  gap: 25px;
   justify-content: space-around;
 }
 
@@ -216,6 +224,7 @@ main .main-content {
   border: none;
   border-bottom: 2px solid grey;
   background: white;
+  padding-left: 10px;
 }
 
 .project-create-form button {

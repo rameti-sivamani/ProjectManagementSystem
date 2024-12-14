@@ -1,4 +1,4 @@
-<% if (path=='/dashboard' ) { %>
+<% if (path=='/dashboard' || path=='/dashboard/myProjects') { %>
   <% if (projects.length> 0) { %>
     <% projects.forEach(project=> { %>
       <div class="project-card">
@@ -13,7 +13,7 @@
         <p class="project-description">
           <%= project.description %>
         </p>
-        <p class="project-tasks">Total Tasks Completed: <%= project.completedTasks %>
+        <p class="project-tasks">Total Tasks : <%= project.tasks.length %>
         </p>
 
         <!-- Team Members -->
@@ -41,7 +41,7 @@
         <% if (project.team.length>1){ %>
           <% project.team.forEach(member=> { %>
             <% if (member.email==owner && member.role=='owner' ){ %>
-              <form action="/dashboard/<%=project._id%>/edit" method="post" class="edit-form">
+              <form action="/dashboard/<%=project._id%>/edit" method="get" class="edit-form">
                 <button class="edit-project"> Edit</button>
               </form>
               <form action="/dashboard/<%=project._id%>/delete" method="post" class="delete-form">

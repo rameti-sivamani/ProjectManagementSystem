@@ -1,11 +1,7 @@
 <Section class="project-view">
-    <section class="resources task-cat-card">
-        <h1 class="task-title">
-            Resources
-        </h1>
-    </section>
+
     <section class="not-started-tasks task-cat-card">
-        <div class="header-task">
+        <div class="header-task"  style="background: #ffb134;">
             <h1 class="task-title">
                 Not Started
             </h1>
@@ -26,11 +22,11 @@
                             </p>
 
                             <% project.team.forEach(member=> { %>
-                                <% if (member.email==owner&& member.role=='owner' ){ %>
-                                    <form action="/dashboard/<%=project._id%>/edit" method="post" class="edit-form">
+                                <% if (member.email==owner && member.role=='owner' ){ %>
+                                    <!-- <form action="/dashboard/<%=project._id%>/tasks/<%=project.tasks.taskId%>/edit" method="get" class="edit-form">
                                         <button class="edit-project"> Edit</button>
-                                    </form>
-                                    <form action="/dashboard/<%=project._id%>/delete" method="post" class="delete-form">
+                                    </form> -->
+                                    <form action="/dashboard/projects/<%=project._id%>/tasks/<%=task.taskId%>/delete" method="post" class="delete-form">
                                         <button class="delete-project"> Delete</button>
                                     </form>
 
@@ -39,7 +35,7 @@
                                             action="/dashboard/projects/<%=project._id%>/tasks/<%=task.taskId %>/updateCategory"
                                             method="post" class="start-form">
                                             <input type="hidden" name="taskCategory" value="onGoing">
-                                            <button class="start-task" type="submit">Start</button>
+                                            <button class="start-task" type="submit" style="background: #00ee87;">Start</button>
                                         </form>
                                         <% }) %>
 
@@ -72,7 +68,7 @@
     </section>
 
     <section class="ongoing-tasks task-cat-card">
-        <div class="header-task">
+        <div class="header-task" style="background: #00ee87;">
             <h1 class="task-title">
                 On Going
             </h1>
@@ -94,10 +90,10 @@
 
                             <% project.team.forEach(member=> { %>
                                 <% if (member.email==owner&& member.role=='owner' ){ %>
-                                    <form action="/dashboard/<%=project._id%>/edit" method="post" class="edit-form">
+                                    <!-- <form action="/dashboard/<%=project._id%>/edit" method="post" class="edit-form">
                                         <button class="edit-project"> Edit</button>
-                                    </form>
-                                    <form action="/dashboard/<%=project._id%>/delete" method="post" class="delete-form">
+                                    </form> -->
+                                    <form action="/dashboard/projects/<%=project._id%>/tasks/<%=task.taskId%>/delete" method="post" class="delete-form">
                                         <button class="delete-project"> Delete</button>
                                     </form>
 
@@ -106,7 +102,7 @@
                                             action="/dashboard/projects/<%=project._id%>/tasks/<%=task.taskId %>/updateCategory"
                                             method="post" class="start-form">
                                             <input type="hidden" name="taskCategory" value="completed">
-                                            <button class="start-task" type="submit">Completed</button>
+                                            <button class="start-task" type="submit" style="background: #015eff;">Completed</button>
                                         </form>
                                         <% }) %>
 
@@ -121,9 +117,9 @@
         </div>
     </section>
     <section class="completed-tasks task-cat-card">
-        <div class="header-task">
+        <div class="header-task" style="background: #015eff;">
             <h1 class="task-title">
-                On Going
+                Completed
             </h1>
         </div>
         <div class="tasks-container">
@@ -173,11 +169,11 @@
     <section class="task-add">
         <form action="/dashboard/projects/<%= project._id %>/newTask" method="post" class="task-add-form">
             <label for="taskTitle">Title :</label>
-            <input type="text" name="taskTitle" id="taskTitle">
+            <input type="text" name="taskTitle" id="taskTitle" required>
             <label for="taskDescription">Description :</label>
-            <input type="text" name="taskDescription" id="taskDescription">
+            <input type="text" name="taskDescription" id="taskDescription" required>
             <label for="taskDeadline">Deadline :</label>
-            <input type="date" name="taskDeadline" id="taskDeadline">
+            <input type="date" name="taskDeadline" id="taskDeadline" required>
             <div>
                 <input type="submit" value="Submit">
                 <button type="reset" onclick="closeTask()">Cancel</button>

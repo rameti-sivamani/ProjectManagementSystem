@@ -3,35 +3,59 @@ const { v4: uuidv4 } = require("uuid");
 
 //post Requests
 Project.createproject = (req, res, next) => {
-  const email = req.user.email; // Email of the user creating the project
+  const projectId=req.body.projectId || "";
+  const email = req.user.email; 
   const title = req.body.title;
   const description = req.body.description;
   const deadline = req.body.deadline;
-  const members = req.body.members || []; // Members added by the creator
+  const members = req.body.members || [];
   const tasks = [];
-  const mem = members.split(",").map((member) => member.trim()); // Add the creator to the members list with special privileges
+  const mem = members.split(",").map((member) => member.trim()); 
   const projectMembers = [
-    { email: email, role: "owner" }, // Creator with 'owner' privileges
-    ...mem.map((member) => ({ email: member, role: "member" })), // Other members as 'member'
+    { email: email, role: "owner" },
+    ...mem.map((member) => ({ email: member, role: "member" })), 
   ];
-
+  if(projectId==""){
   Project.createProject({
     title: title,
     description: description,
     deadline: deadline,
-    team: projectMembers, // Save project members with roles
+    team: projectMembers, 
     tasks: tasks,
   })
     .then((project) => {
-      console.log("Project Created with members:", projectMembers);
-      res
-        .status(201)
-        .json({ message: "Project created successfully", project });
+      res.render("dashboard", {
+        title: "Create project",
+        message: "Project created Successfully",
+        path:'/dashbord/create',
+        redirectUrl: "/dashboard",
+      });
     })
     .catch((err) => {
-      console.error("Error creating project:", err);
       res.status(500).json({ message: "Error creating project", error: err });
     });
+  }
+  else if(projectId!=""){
+    Project.updateMany({_id:projectId},{
+      $set:{
+        title: title,
+        description: description,
+        deadline: deadline,
+        team: projectMembers, 
+        tasks: tasks,
+      }
+    }).then((project) => {
+      res.render("dashboard", {
+        title: "Create project",
+        message: "Project Updated Successfully",
+        path:'/dashbord/create',
+        redirectUrl: "/dashboard",
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Error creating project", error: err });
+    });
+  }
 };
 
 Project.deleteProject = (req, res, next) => {
@@ -39,8 +63,12 @@ Project.deleteProject = (req, res, next) => {
   //const id=req.body.projectId
   Project.findByIdAndDelete({ _id: id })
     .then((result) => {
-      res.redirect("/dashboard");
-    })
+      res.render("dashboard", {
+        title: "Dashboard",
+        message: "Project Deleted Successfully",
+        path:'/dashbord',
+        redirectUrl: "/dashboard",
+      });    })
     .catch((err) => {
       console.log(err);
     });
@@ -49,9 +77,25 @@ Project.deleteProject = (req, res, next) => {
 Project.createNewProject = (req, res, next) => {
   res.render("dashboard", {
     title: "Create project",
+    message:"",
+    redirectUrl:null,
     path: "/dashboard/create",
+    
   });
-  res.redirect("/dashboard");
+};
+Project.EditProject = (req, res, next) => {
+  const id = req.params.projectId;
+  const email=req.user.email;
+  Project.findOne({ _id: id }).then((project) => {
+    const members = project.team.filter(member => member.email !== email).map(member=>member.email);
+    res.render("dashboard", {
+      project: project,
+      title: "Edit project",
+      path: "/project/edit",
+      members:members,
+      message:""
+    });
+  });
 };
 
 Project.viewProject = (req, res, next) => {
@@ -63,6 +107,7 @@ Project.viewProject = (req, res, next) => {
         title: "Project View",
         project: project,
         tasks: project.tasks,
+        message:"",
         path: "/dashboard/projectId",
         owner: email,
       });
@@ -72,53 +117,9 @@ Project.viewProject = (req, res, next) => {
     });
 };
 
-Project.createTask = (req, res, next) => {
-  const projectId = req.params.projectId;
-  const newTask = {
-    taskId: uuidv4(),
-    taskTitle: "create design", //req.body.taskTitle,
-    taskDescription: "please this make this more quicker", //req.body.taskDescription,
-    taskDeadline: "2024-12-23", //req.body.taskDeadline,
-    taskStartedAt: "",
-    taskCmpletedAt: "",
-    taskCategory: "notStarted", //req.body.taksCategory
-  };
-  Project.updateOne(
-    { _id: projectId },
-    { $push: { tasks: newTask } },
-    { new: true }
-  )
-    .then((result) => {
-      res.redirect(`/dashboard/projects/${projectId}`);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
 
-Project.updateTaskCategory = (req, res, next) => {
-  const projectId = req.params.projectId;
-  const taskId = req.params.taskId;
-  const taskCategory = req.body.taskCategory;
-  console.log(taskId, taskCategory);
-  Project.updateOne(
-    { _id: projectId, "tasks.taskId": taskId },
-    {
-      $set: { "tasks.$.taskCategory": taskCategory },
-    },
-    {
-      new: true,
-    }
-  )
-    .then((result) => {
-      console.log(result);
-      res.redirect(`/dashboard/projects/${projectId}`);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-const Items_Per_Page=2;
+
+const Items_Per_Page = 2;
 Project.displayTeams = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalProjects = 0;
@@ -136,6 +137,7 @@ Project.displayTeams = (req, res, next) => {
         title: "Teams",
         projects: projects,
         path: "/dashboard/teams",
+        message:"",
         owner: email,
         currentPage: page,
         hasNextPage: Items_Per_Page * page < totalProjects,
@@ -144,18 +146,17 @@ Project.displayTeams = (req, res, next) => {
         previousPage: page - 1,
         lastPage: Math.ceil(totalProjects / Items_Per_Page),
       });
-    }); 
+    });
 };
 
-
-Project.displayReports=(req,res,next)=>{
+Project.displayReports = (req, res, next) => {
   let totalProjects = 0;
   const email = req.user.email;
   Project.find({ "team.email": email })
     .countDocuments()
     .then((numProjects) => {
       totalProjects = numProjects;
-      return Project.find({ "team.email": email })
+      return Project.find({ "team.email": email });
     })
     .then((projects) => {
       res.render("dashboard", {
@@ -163,9 +164,29 @@ Project.displayReports=(req,res,next)=>{
         projects: projects,
         path: "/dashboard/reports",
         owner: email,
+        message:""
       });
-    }); 
-}
+    });
+};
 
+Project.search = (req, res, next) => {
+  const email = req.user.email;
+  let find = req.query.find;
+  if (find == "") {
+    find = "No results found in the database";
+  }
+  Project.find({
+    "team.email": email,
+    title: { $regex: `.*${find}.*`, $options: "i" }
+  }).then((projects) => {
+    res.render("dashboard", {
+      title: "Search",
+      projects: projects,
+      path: "/dashboard/search",
+      owner: email,
+      message:""
+    });
+  });
+};
 
 module.exports = Project;

@@ -1,0 +1,61 @@
+<h1 style="margin: 15px;text-align: center;">Search Results</h1>
+
+<section class="search-container" style="width: 90%; display: flex; gap: 30px; justify-content: center;flex-wrap: wrap; scrollbar-width: 0px;">
+  
+    <% if (projects.length> 0) { %>
+        <% projects.forEach(project=> { %>
+          <div class="project-card">
+            <h2 class="project-title">Project Title: <%= project.title %>
+            </h2>
+    
+            <!-- Project Status -->
+            <p class="project-status <%= project.status === 'ongoing' ? 'status-ongoing' : 'status-finished' %>">
+              <%= project.status %>
+            </p>
+    
+            <p class="project-description">
+              <%= project.description %>
+            </p>
+            <p class="project-tasks">Total Tasks: <%= project.tasks.length %>
+            </p>
+            <!-- Team Members -->
+            <div class="team-members">
+              <h3>Team Members:</h3>
+              <ul>
+                <% project.team.slice(0, 2).forEach(member=> { %>
+                  <li>
+                    <%= member.email %> (<%= member.role %>)
+                  </li>
+                  <% }); %>
+              </ul>
+              <% if (project.team.length> 2) { %>
+                <p>and <%= project.team.length - 2 %> more...</p>
+                <% } %>
+            </div>
+    
+            <!-- View Project Button -->
+            <div class="view-button">
+              <form action="/dashboard/projects/<%= project._id %>">
+                <button type="submit" class="btn-view">View Project</button>
+              </form>
+            </div>
+    
+            <% if (project.team.length>1){ %>
+              <% project.team.forEach(member=> { %>
+                <% if (member.email==owner && member.role=='owner' ){ %>
+                  <form action="/dashboard/<%=project._id%>/edit" method="post" class="edit-form">
+                    <button class="edit-project"> Edit</button>
+                  </form>
+                  <form action="/dashboard/<%=project._id%>/delete" method="post" class="delete-form">
+                    <button class="delete-project"> Delete</button>
+                  </form>
+                  <% }%>
+                    <% }); %>
+                      <% }%>
+    
+          </div>
+          <% }); %>
+            <% } else { %>
+              <p>No projects found. </p>
+              <% } %>
+</section>

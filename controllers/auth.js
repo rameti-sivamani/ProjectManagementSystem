@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
     pass: "zsiz iqux drww uoia", // replace with your email password or app password
   },
 });
- 
+
 require("dotenv").config();
 
 const User = require("../models/User");
@@ -34,10 +34,10 @@ User.login = (req, res, next) => {
   });
 };
 User.home = (req, res, next) => {
-  const message = req.flash('message');
+  const message = req.flash("message");
   res.render("index.ejs", {
     title: "Essense Flow",
-    message:message
+    message: message,
   });
 };
 
@@ -59,7 +59,6 @@ User.postRegister = (req, res, next) => {
           password: paswd,
         })
           .then((user) => {
-            console.log(user);
             const SECRET_KEY = process.env.SECRET_KEY;
             const token = jwt.sign(
               { id: user.id, email: user.email },
@@ -106,7 +105,6 @@ User.postRegister = (req, res, next) => {
 
 User.postLogin = (req, res, next) => {
   const { email, password } = req.body;
-  console.log(req.headers); // Debugging log to check headers
 
   User.findByEmail(email).then((user) => {
     if (user) {
@@ -120,9 +118,6 @@ User.postLogin = (req, res, next) => {
               SECRET_KEY,
               { expiresIn: "1hr" }
             );
-
-            console.log("User logged in");
-
             res.cookie("token", token, {
               httpOnly: true, // Prevent JavaScript access
               secure: process.env.NODE_ENV === "production", // Only send over HTTPS in production
@@ -130,16 +125,117 @@ User.postLogin = (req, res, next) => {
               maxAge: 3600000, // Cookie expiry (1 hour)
             });
             req.flash("message", "Successfully Logged In");
+            transporter.sendMail(
+              {
+                from: "no-reply@essesnceflow.com",
+                to: email,
+                subject: `Welcome Back, , ${user.fullname}! 🎉 `, // subject
+                html:
+                  "<p>Hi! " +
+                  user.fullname +
+                  "<br>We’re thrilled to have you back! Your account has been successfully logged in, and you’re ready to explore all the features we have to offer.If you need any assistance, feel free to reach out to us anytime.<br> Happy browsing!"+"<br>"+"Best regards,.<br>Essence Flow Pvt Ltd.</p>",
+              },
+              (error, info) => {
+                if (error) {
+                  return console.log("Error:", error);
+                }
+                console.log("Email sent: " + info.response);
+              }
+            );
             return res.redirect("/dashboard"); // Redirect to the dashboard
           }
-          return res.status(400).json({ message: "Invalid password" });
+          res.render("registration.ejs", {
+            path: "/login",
+            title: "Login",
+            message: "Invalid Password ,Enter valid Password",
+            redirectUrl:"/login"
+          });
         })
         .catch((err) => {
           console.log(err);
         });
     } else {
-      return res.status(400).json({ message: "The email does not exist" });
+      return  res.render("registration.ejs", {
+        path: "/register",
+        title: "Register",
+        redirectUrl:'/register',
+        message: "No user found please Register",
+      });
     }
+  });
+};
+
+User.profile = (req, res, next) => {
+  const email = req.user.email;
+  User.findByEmail(email).then((user) => {
+    user.password = res.render("dashboard", {
+      title: "Profile",
+      path: "/profile",
+      message: "",
+      user: user,
+    });
+  });
+};
+User.updatePassword = (req, res, next) => {
+
+  const email = req.user.email;
+  const password = req.body.Password;
+  const newPassword = req.body.newPassword;
+  if (!password || !newPassword) {
+    return res.render("dashboard", {
+      title: "Profile",
+      path: "/profile",
+      message: "Please provide both current and new password",
+      redirectUrl:"/dashboard/profile",
+      user: req.user,
+    });
+  }
+  User.findOne({email:email}).then((user) => {
+    bcrypt.compare(password, user.password)
+      .then((isMatch) => {
+        if (isMatch) {
+          // Hash the new password
+          bcrypt.hash(newPassword, 12)
+            .then((hashedPassword) => {
+              // Update user's password with the new hashed password
+              user.password = hashedPassword;
+              user.save()  // Save the updated user object
+                .then(() => {
+                  res.render("dashboard", {
+                    title: "Profile",
+                    path: "/profile",
+                    message: "Password Changed Successfully",
+                    redirectUrl:"/dashboard/profile",
+                    user: user,
+                  });
+                })
+                .catch((err) => {
+                  console.log(err);
+                  res.status(500).send("Error saving updated password");
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+              res.status(500).send("Error hashing new password");
+            });
+        } else {
+          res.render("dashboard", {
+            title: "Profile",
+            path: "/profile",
+            message: "Current Password is Incorrect",
+            redirectUrl:"/dashboard/profile",
+            user: user,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send("Error comparing passwords");
+      });
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500).send("Error finding user");
   });
 };
 
