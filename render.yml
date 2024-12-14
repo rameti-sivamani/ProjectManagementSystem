@@ -1,1 +1,25 @@
 
+# render.yml
+
+services:
+  - type: web
+    name: my-web-service
+    env: node
+    branch: main
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    autoDeploy: true
+    healthCheckPath: /
+    plan: free # or 'starter', 'pro', etc.
+
+databases:
+  - name: my-database
+    type: postgresql
+    plan: free
+    region: oregon
+
+staticSites:
+  - name: my-static-site
+    buildCommand: npm run build
+    publishPath: build
+    branch: main
