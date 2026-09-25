@@ -1,3 +1,12 @@
+require("dotenv").config();
+
+if (!process.env.SECRET_KEY) {
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("SECRET_KEY must be set in production");
+  }
+  console.warn("SECRET_KEY is not set; using a development-only key.");
+  process.env.SECRET_KEY = "local-development-jwt-secret";
+}
 const express = require("express");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
@@ -27,7 +36,7 @@ app.use(cookieParser());
 
 app.use(
   session({
-    secret: "mysecret",
+    secret: process.env.SESSION_SECRET || "local-development-session-secret",
     resave: false,
     saveUninitialized: true,
   })
@@ -37,6 +46,7 @@ app.use("/dashboard", middleware.verifyToken, dashboard);
 
 app.use("/", middleware.TokenAvailable, normalRoutes);
 
-app.listen("3000", () => {
-  console.log("Listening at port 3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Listening at http://localhost:${PORT}`);
 });
