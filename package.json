@@ -1,23 +1,19 @@
 {
   "name": "project_management_system",
   "version": "1.0.0",
-  "description": "This project is used t manage the project related tasks in the collaberativve manner ",
+  "description": "Project management dashboard for teams: projects, tasks, progress reports and team collaboration.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [
-    "project",
-    "management",
-    "todo",
-    "list",
-    "project",
-    "project",
-    "management",
-    "system",
-    "collaboration",
-    "teamup"
+    "project-management",
+    "express",
+    "mongodb",
+    "ejs",
+    "jwt",
+    "collaboration"
   ],
   "author": "Sivamani Rameti",
   "license": "ISC",
@@ -39,5 +35,8 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.7"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

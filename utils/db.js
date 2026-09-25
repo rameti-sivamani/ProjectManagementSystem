@@ -1,6 +1,8 @@
 const mongoose = require("mongoose"); 
 mongoose.Promise = require("bluebird"); 
-const dbURI = "mongodb+srv://testuser:test123@cluster0.s3vuxyh.mongodb.net/ProjectManagementSystem"
+require("dotenv").config();
+
+const dbURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/ProjectManagementSystem";
 mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
